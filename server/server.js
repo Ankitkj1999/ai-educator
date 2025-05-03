@@ -1,5 +1,6 @@
 //IMPORT
 const express = require('express');
+const portfinder = require('portfinder');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer')
@@ -21,6 +22,34 @@ const flw = new Flutterwave(process.env.FLUTTERWAVE_PUBLIC_KEY, process.env.FLUT
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT;
+const DEFAULT_PORT = 5002; // Define a default if not in .env
+const preferredPort = parseInt(process.env.PORT || DEFAULT_PORT, 10);
+portfinder.basePort = preferredPort;
+
+// Find an available port starting from the preferred one
+portfinder.getPort((err, availablePort) => {
+    if (err) {
+        console.error("Could not find an available port:", err);
+        process.exit(1); // Exit if no port is found (or handle differently)
+    }
+
+    // Check if the available port is different from the preferred one
+    if (availablePort !== preferredPort) {
+        console.warn(`Warning: Port ${preferredPort} was in use. Server is starting on port ${availablePort} instead.`);
+    }
+
+    // Start the server on the available port
+    const server = app.listen(availablePort, () => {
+        console.log(`Server is running on port ${availablePort}`);
+    });
+
+    // Optional: Add error handling for other server errors after listen starts
+    server.on('error', (error) => {
+        console.error('Server error after startup:', error);
+        // Handle specific errors if needed, e.g., gracefully shut down
+    });
+});
+
 app.use(bodyParser.json());
 mongoose.connect(process.env.MONGODB_URI);
 const transporter = nodemailer.createTransport({
@@ -33,6 +62,7 @@ const transporter = nodemailer.createTransport({
         pass: process.env.PASSWORD,
     },
 });
+
 
 // Simple Request Logger Middleware
 app.use((req, res, next) => {
@@ -2367,7 +2397,7 @@ app.post('/api/deleteuser', async (req, res) => {
     }
 });
 
-//LISTEN
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// //LISTEN
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
