@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiCourse Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .sidebar {
+            background-color: #f9fafc;
+            color: white;
+            width: 270px;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            box-shadow: 0.5px 0 1px rgba(108, 108, 108, 0.2);
+        }
+
+        .sec {
+            margin-top: 25px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar a {
+            color: #000;
+            text-decoration: none;
+            display: block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background: #dcdde0;
+            transform: scale(1.02);
+        }
+
+        .content {
+            margin-left: 270px;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #111;
+        }
+
+        h2 {
+            margin-top: 10px;
+            border-bottom: 1px solid #c9c9c9;
+            padding-bottom: 10px;
+            color: #111;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                visibility: hidden;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            iframe {
+                width: 560px;
+                height: 315px;
+            }
+        }
+    </style>
+</head>
+
+<body onload="check()">
+
+    <div class="sidebar">
+        <a href="#section1">Requirement</a>
+        <a href="#section11">Steps To Follow</a>
+        <a href="#section2">Step 1 - Getting Started</a>
+        <a href="#section3">Step 2 - Set Up Website</a>
+        <a href="#section4">Step 3 - Set Up Social Login</a>
+        <a href="#section5">Step 4 - Set Up Payment</a>
+        <a href="#section6">Step 5 - Deploy</a>
+        <a href="#section7">Step 6 - How to use Admin Panel</a>
+        <a href="#section23">Step 7 - How to Update</a>
+    
+    </div>
+
+    <div class="content">
+        <h1>AiCourse Documentation</h1>
+        <p>
+            
+            This is documentation on how to set up and deploy the AiCourse Web App on your hosting platform, customized
+            with your brand name.
+          
+        </p>
+
+        <div id="section1" class="sec">
+            <h2>Requirement</h2>
+            <p>
+            <ul>
+                <li>VS Code - <a href="https://code.visualstudio.com">Free</a></li>
+                <li>Node JS - <a href="https://nodejs.org/en">Free</a></li>
+                <li>GIT - <a href="https://git-scm.com/downloads">Free</a></li>
+                <li>MongoDB - <a href="https://www.mongodb.com/">Free</a></li>
+                <li>Gemini API - <a href="https://aistudio.google.com/app">Free</a></li>
+                <li>Github - <a href="https://github.com">Free</a></li>
+                <li>Unsplash - <a href="https://unsplash.com">Free</a></li>
+                <li>PayPal - <a href="https://www.paypal.com">Free</a></li>
+                <li>Paystack - <a href="https://www.paystack.com">Free</a></li>
+                <li>Flutterwave - <a href="https://www.flutterwave.com">Free</a></li>
+                <li>Google Login - <a href="https://g.co/kgs/hrq3q5m">Free</a></li>
+                <li>Facebook Login - <a href="https://developers.facebook.com">Free</a></li>
+                <li>Razorpay - <a href="https://razorpay.com">Free</a></li>
+                <li>Render.com - <a href="https://render.com">Free</a></li>
+                <li>Firebase Hosting (Optional) - <a href="https://firebase.google.com">Free</a></li>
+                <li>Any Other Web Hosting (Optional) - <a href="https://firebase.google.com">Paid</a></li>
+            </ul>
+            </p>
+        </div>
+
+        <div id="section11" class="sec">
+            <h2>Steps To Follow</h2>
+            <p>Follow these videos in order, step by step, to fully set up and install the website.
+            </p>
+            <p>
+            <ul>
+                <li><a href="#section2">Step 1 - Getting Started</a></li>
+                <li><a href="#section3">Step 2 - Set Up Website</a></li>
+                <li><a href="#section4">Step 3 - Set Up Social Login</a></li>
+                <li><a href="#section5">Step 4 - Set Up Payment</a></li>
+                <li><a href="#section6">Step 5 - Deploy</a></li>
+                <li><a href="#section7">Step 6 - How to use Admin Panel</a></li>
+            </ul>
+            </p>
+        </div>
+
+        <div id="section2" class="sec">
+            <h2>Step 1 - Getting Started</h2>
+            <p>
+                In this video, I will show you how to download the required software to set up the website.
+            </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/lel_JQhjHLw?si=h0dncFEtlrtvdaLD"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div id="section3" class="sec">
+            <h2>Step 2 - Set Up Website</h2>
+            <p>
+                In this video, I will show you how to set up website name, logo, set up payments etc.
+            </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Z_lRvyxWiVU?si=yl12f2OLRYneRq0J"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div id="section4" class="sec">
+            <h2>Step 3 - Set Up Social Login</h2>
+            <p>
+                In this video, I will show you how to set up payment methods flutterwave and social login (Google &
+                Facebook).
+            </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/s3er-DFHZVk?si=IvGpdUBk04JZs2O-"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div id="section5" class="sec">
+            <h2>Step 4 - Set Up Payment</h2>
+            <p>In this video, I will show you how to set up payment methods stripe and paystack.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rXzup0AbSWM?si=A9WZOxNApv9N5AmH"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div id="section6" class="sec">
+            <h2>Step 5 - Deploy</h2>
+            <p>In this video, I will show you how to deploy the server and how to upload the website on web hosting &
+                firebase hosting.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/uLIDcDZkkKg?si=Clxz22fpCXy1dP3S"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div id="section7" class="sec">
+            <h2>Step 6 - How to use Admin Panel</h2>
+            <p> In this video, I will show you how to use admin panel.</p>
+            <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/Z_lRvyxWiVU?si=fzHGczuQxNoJZcc6&amp;start=1413"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div id="section23" class="sec">
+            <h2>Step 7 - How to Update to New Version 4.0</h2>
+            <p>
+                You only need to follow this step if you are updating from version 3.0 or later to the new version 4.0.
+                Otherwise, you can skip this step.
+                To update your existing source code, simply copy these files from the provided path of the new source
+                code and paste them into the corresponding path of your existing source code.
+                After that, update your <code>server.js</code> file on GitHub and your source code on your hosting
+                platform in the same way as shown above.
+                Once done, your website will be updated to version 4.0.
+            </p>
+            <p>
+                Here are the paths to the files that need to be copied and updated in your existing source code:
+            </p>
+            <ul>
+                <li>\AiCourse v4.0\server\server.js</li>
+                <li>\AiCourse v4.0\src\admin\components\adminsidebar.js</li>
+                <li>\AiCourse v4.0\src\admin\components\adminstable.js</li>
+                <li>\AiCourse v4.0\src\components\landing\slideFour.js</li>
+                <li>\AiCourse v4.0\src\components\landing\slideOne.js</li>
+                <li>\AiCourse v4.0\src\components\landing\slideSix.js</li>
+                <li>\AiCourse v4.0\src\components\landing\slideTwo.js</li>
+                <li>\AiCourse v4.0\src\components\chatWidget.js</li>
+                <li>\AiCourse v4.0\src\components\notesWidget.js</li>
+                <li>\AiCourse v4.0\src\components\pricing.js</li>
+                <li>\AiCourse v4.0\src\components\usercourses.js</li>
+                <li>\AiCourse v4.0\src\pages\certificate.js</li>
+                <li>\AiCourse v4.0\src\pages\course.js</li>
+                <li>\AiCourse v4.0\src\pages\create.js</li>
+                <li>\AiCourse v4.0\src\pages\exam.js</li>
+                <li>\AiCourse v4.0\src\pages\features.js</li>
+                <li>\AiCourse v4.0\src\pages\payment.js</li>
+                <li>\AiCourse v4.0\src\pages\pricing.js</li>
+                <li>\AiCourse v4.0\src\pages\profile.js</li>
+                <li>\AiCourse v4.0\src\pages\shareable.js</li>
+                <li>\AiCourse v4.0\src\pages\signin.js</li>
+                <li>\AiCourse v4.0\src\pages\topics.js</li>
+                <li>\AiCourse v4.0\src\res\img\certificate.png</li>
+                <li>\AiCourse v4.0\src\res\img\slideOne.png</li>
+                <li>\AiCourse v4.0\src\App.css</li>
+                <li>\AiCourse v4.0\src\App.js</li>
+                <li>\AiCourse v4.0\package.json</li>
+            </ul>
+        </div>
+ 
+
+   
+
+    </div>
+
+    <script>
+        window.onload = function () {
+            window.scrollTo(0, 0);
+        };
+    </script>
+
+
+</body>
+
+</html>
