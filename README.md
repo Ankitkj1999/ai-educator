@@ -149,23 +149,135 @@ Here are the paths to the files that need to be copied and updated in your exist
 *   `\AiCourse v4.0\package.json`
 
 ---
-<!-- TODO  -->
-## TODO - Security Measures
-Implement Password Hashing:
-Securely hash user passwords (e.g., using bcrypt) before storing them in the userSchema. Never store plain text passwords.
-Enhance Input Validation:
-Add comprehensive validation (e.g., using a library like Joi or express-validator) for all incoming request bodies (req.body) and query parameters (req.query) to prevent errors and potential security issues.
-Robust Error Handling & Logging:
-Replace generic error responses (e.g., //DO NOTHING or basic 500 errors) with more specific error codes and messages. Implement detailed server-side logging for errors and critical operations (e.g., using winston or pino).
-Refactor into Modular Routes/Controllers:
-Break down the single large server.js file by grouping related routes (e.g., auth, payments, courses, admin) into separate router files and controller functions for better organization and maintainability.
-Secure Webhook Endpoints:
-Implement signature verification for all incoming webhooks (PayPal, Stripe, Razorpay, etc.) to ensure they originate from the trusted payment provider.
-Implement Authorization & Access Control:
-Ensure users can only access/modify their own data (e.g., courses, subscriptions). Strengthen admin-only endpoint protection beyond simple checks if not already robust.
-Use Database Transactions:
-Wrap related database operations (e.g., creating a user and admin entry simultaneously, or updating user type and subscription status) in transactions to ensure data consistency.
-Environment Variable Management:
-Double-check that all sensitive credentials, API keys, and environment-specific configurations (URLs, plan IDs, costs) are exclusively managed through .env files and process.env. Document required variables.
-Create Swagger Documentation:
-Automatically generate API documentation using Swagger or similar tools. This will help developers understand the available endpoints, request/response formats, and security requirements.
+## Backend TODOs - Security, Refactoring & Best Practices
+
+### Security Measures
+
+*   **Implement Password Hashing:**
+    *   [ ] Securely hash user passwords (e.g., using `bcrypt`) before storing them in the `userSchema`. **Never store plain text passwords.**
+*   **Enhance Input Validation:**
+    *   [ ] Add comprehensive validation (e.g., using a library like `Joi` or `express-validator`) for all incoming request bodies (`req.body`) and query parameters (`req.query`) to prevent errors, malformed data, and potential injection vulnerabilities.
+*   **Secure Webhook Endpoints:**
+    *   [ ] Implement signature verification for all incoming webhooks (PayPal, Stripe, Razorpay, etc.) to ensure they originate from the trusted payment provider and haven't been tampered with.
+*   **Implement Authorization & Access Control (RBAC/ABAC):**
+    *   [ ] Ensure users can only access/modify their own data (e.g., personal courses, subscriptions).
+    *   [ ] Strengthen admin-only endpoint protection beyond simple checks, potentially using middleware to verify admin roles.
+*   **Environment Variable Management:**
+    *   [ ] Double-check that *all* sensitive credentials (database URIs, API keys, email passwords, payment gateway secrets), and environment-specific configurations (URLs, plan IDs, costs) are exclusively managed through `.env` files and accessed via `process.env`.
+    *   [ ] Create a `.env.example` file to document required environment variables without committing actual secrets.
+*   **Set Security HTTP Headers:**
+    *   [ ] Implement security-enhancing HTTP headers (e.g., using a library like `helmet`) to protect against common web vulnerabilities like XSS, clickjacking, etc. (e.g., `X-Content-Type-Options`, `X-Frame-Options`, `Strict-Transport-Security`).
+*   **Implement Basic Rate Limiting:**
+    *   [ ] Add rate limiting (e.g., using `express-rate-limit`) to API endpoints, especially authentication and resource-intensive ones, to prevent abuse and DoS attacks.
+*   **Sanitize User-Generated Content for Output:**
+    *   [ ] If displaying user-provided content (like notes or course content directly input by users) back to other users or in HTML, ensure it's properly sanitized to prevent XSS attacks. (Note: `showdown` for Markdown to HTML needs careful configuration if the Markdown source is untrusted).
+
+### Refactoring & Maintainability
+
+*   **Refactor into Modular Routes/Controllers:**
+    *   [ ] Break down the single large `server.js` file by grouping related routes (e.g., authentication, payments, courses, admin) into separate router files (`routes/auth.js`, `routes/payment.js`, etc.).
+    *   [ ] Move business logic for each route into corresponding controller functions (`controllers/authController.js`, etc.) for better organization and testability.
+*   **Use Database Transactions:**
+    *   [ ] Wrap related database operations (e.g., creating a user and admin entry simultaneously, or updating user type and subscription status after a successful payment) in Mongoose transactions to ensure data atomicity and consistency.
+*   **Consistent and Specific Error Handling:**
+    *   [ ] Replace generic error responses (e.g., `//DO NOTHING` or basic 500 errors) with more specific HTTP status codes and meaningful JSON error messages.
+    *   [ ] Implement a centralized error handling middleware.
+*   **Detailed Server-Side Logging:**
+    *   [ ] Implement detailed server-side logging for requests, errors, and critical operations (e.g., using a library like `winston` or `pino`). Include timestamps and relevant context.
+
+### API & Documentation
+
+*   **Create/Generate API Documentation (e.g., Swagger/OpenAPI):**
+    *   [ ] Document all API endpoints, including request/response formats, expected parameters, authentication requirements, and potential error codes.
+    *   [ ] Consider using tools like Swagger/OpenAPI (e.g., with `swagger-jsdoc` and `swagger-ui-express`) to generate interactive API documentation.
+
+This list provides a good roadmap for enhancing the backend's security, structure, and maintainability.
+
+
+
+
+
+          
+## Frontend TODOs - UI/UX, Performance & Best Practices
+
+### UI/UX Enhancements
+
+* **Landing Page Optimization:**
+    * [ ] Redesign hero section with more engaging visuals and clearer value proposition
+    * [ ] Add interactive course preview cards with hover effects
+    * [ ] Implement smooth scroll animations between sections
+    * [ ] Add testimonials section with student success stories
+    * [ ] Create an animated features showcase
+
+* **Course Interface Improvements:**
+    * [ ] Implement a progress tracking sidebar showing course completion status
+    * [ ] Add a collapsible course outline with current section highlight
+    * [ ] Create better visual hierarchy for course content (headings, subheadings, content)
+    * [ ] Add estimated time to complete for each section
+    * [ ] Implement a floating action button for quick navigation
+
+* **Chat Widget Enhancement:**
+    * [ ] Add typing indicators for AI responses
+    * [ ] Implement markdown support for better code formatting
+    * [ ] Add code syntax highlighting
+    * [ ] Create a collapsible chat history sidebar
+    * [ ] Add ability to save important chat snippets
+
+* **Notes Widget Upgrade:**
+    * [ ] Add rich text editing capabilities
+    * [ ] Implement auto-save functionality
+    * [ ] Add tags/categories for better organization
+    * [ ] Create a search function for notes
+    * [ ] Add export options (PDF, Markdown)
+
+### Performance Optimization
+
+* **Code Splitting & Lazy Loading:**
+    * [ ] Implement React.lazy() for route-based code splitting
+    * [ ] Add Suspense boundaries with meaningful loading states
+    * [ ] Lazy load images and heavy components
+    * [ ] Implement infinite scrolling for long lists
+
+* **State Management:**
+    * [ ] Refactor global state management using Context API or Redux
+    * [ ] Implement proper state persistence
+    * [ ] Add error boundaries for better error handling
+    * [ ] Optimize re-renders using React.memo and useMemo
+
+### Accessibility & Best Practices
+
+* **Accessibility Improvements:**
+    * [ ] Add proper ARIA labels and roles
+    * [ ] Ensure proper heading hierarchy
+    * [ ] Implement keyboard navigation
+    * [ ] Add screen reader support
+    * [ ] Ensure sufficient color contrast
+
+* **Component Architecture:**
+    * [ ] Create a component library with storybook documentation
+    * [ ] Implement proper prop-types or TypeScript interfaces
+    * [ ] Add unit tests for critical components
+    * [ ] Create reusable hooks for common functionality
+
+* **Responsive Design:**
+    * [ ] Implement mobile-first approach
+    * [ ] Add proper breakpoints for all screen sizes
+    * [ ] Optimize touch targets for mobile devices
+    * [ ] Ensure consistent spacing across viewports
+
+### Developer Experience
+
+* **Code Quality:**
+    * [ ] Set up ESLint with proper rules
+    * [ ] Add Prettier for consistent code formatting
+    * [ ] Implement pre-commit hooks for code quality
+    * [ ] Add JSDoc comments for complex components
+
+* **Build & Deployment:**
+    * [ ] Optimize build configuration for production
+    * [ ] Implement proper environment variable management
+    * [ ] Add build-time optimizations (tree shaking, minification)
+    * [ ] Set up continuous integration/deployment pipeline
+
+This TODO list provides a structured approach to improving the frontend of the AiCourse platform, focusing on user experience, performance, and maintainability. The tasks are organized by priority and impact, allowing for systematic implementation.
+        
