@@ -147,3 +147,25 @@ Here are the paths to the files that need to be copied and updated in your exist
 *   `\AiCourse v4.0\src\App.css`
 *   `\AiCourse v4.0\src\App.js`
 *   `\AiCourse v4.0\package.json`
+
+---
+<!-- TODO  -->
+## TODO - Security Measures
+Implement Password Hashing:
+Securely hash user passwords (e.g., using bcrypt) before storing them in the userSchema. Never store plain text passwords.
+Enhance Input Validation:
+Add comprehensive validation (e.g., using a library like Joi or express-validator) for all incoming request bodies (req.body) and query parameters (req.query) to prevent errors and potential security issues.
+Robust Error Handling & Logging:
+Replace generic error responses (e.g., //DO NOTHING or basic 500 errors) with more specific error codes and messages. Implement detailed server-side logging for errors and critical operations (e.g., using winston or pino).
+Refactor into Modular Routes/Controllers:
+Break down the single large server.js file by grouping related routes (e.g., auth, payments, courses, admin) into separate router files and controller functions for better organization and maintainability.
+Secure Webhook Endpoints:
+Implement signature verification for all incoming webhooks (PayPal, Stripe, Razorpay, etc.) to ensure they originate from the trusted payment provider.
+Implement Authorization & Access Control:
+Ensure users can only access/modify their own data (e.g., courses, subscriptions). Strengthen admin-only endpoint protection beyond simple checks if not already robust.
+Use Database Transactions:
+Wrap related database operations (e.g., creating a user and admin entry simultaneously, or updating user type and subscription status) in transactions to ensure data consistency.
+Environment Variable Management:
+Double-check that all sensitive credentials, API keys, and environment-specific configurations (URLs, plan IDs, costs) are exclusively managed through .env files and process.env. Document required variables.
+Create Swagger Documentation:
+Automatically generate API documentation using Swagger or similar tools. This will help developers understand the available endpoints, request/response formats, and security requirements.
