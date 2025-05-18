@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const Header = ({ isHome }) => {
-
   const storedTheme = sessionStorage.getItem('darkMode');
   const navigate = useNavigate();
   const [admin, setAdmin] = useState(false);
@@ -33,7 +32,7 @@ const Header = ({ isHome }) => {
     } else {
       dashboardData();
     }
-  });
+  }, [isHome, navigate]);
 
   function redirectSignIn() {
     navigate("/signin");
@@ -82,56 +81,107 @@ const Header = ({ isHome }) => {
     });
   }
 
+  // Theme-based styles
+  const navBg =
+    storedTheme === "true"
+      ? "bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900 border-b border-blue-400"
+      : "bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 border-b border-blue-400";
+
+  const linkBase =
+    "transition-colors duration-200 border-b-0 font-medium mb-2 mt-2 px-4 py-2 rounded-lg";
+  const linkLight =
+    "text-blue-900 hover:bg-blue-200 hover:text-purple-700";
+  const linkDark =
+    "text-pink-100 hover:bg-blue-950 hover:text-pink-300";
+  const btnBase =
+    "font-bold px-6 py-2 rounded-lg transition-colors duration-200";
+  const btnLight =
+    "bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600";
+  const btnDark =
+    "bg-gradient-to-r from-blue-700 to-pink-700 text-white hover:from-blue-800 hover:to-pink-800";
+
   return (
     <Flowbite>
-      {!isHome ?
-        <>
-          <Navbar fluid className=' py-3 dark:bg-black'>
-            <Navbar.Brand href={websiteURL} className="ml-1">
-              <LogoComponent isDarkMode={storedTheme} />
-              <span className="self-center whitespace-nowrap text-2xl font-black dark:text-white ">{name}</span>
-            </Navbar.Brand>
-            <div className="flex md:hidden justify-center items-center">
-              <DarkModeToggle className='inline-flex items-cente md:hidden' />
-              <Navbar.Toggle className='inline-flex items-center rounded-lg p-2 text-sm text-black hover:bg-white focus:outline-none focus:ring-0 focus:ring-gray-200 dark:text-white dark:hover:bg-black dark:focus:ring-gray-600 md:hidden' />
-            </div>
-            <Navbar.Collapse>
-              <div className="hidden md:flex justify-center items-center">
-                <DarkModeToggle />
-              </div>
-              <Navbar.Link className='border-b-0 text-black  font-normal mb-2 mt-2 dark:text-white  hover:bg-white dark:hover:bg-black hover:text-black md:hover:text-black dark:hover:text-white dark:md:hover:text-white' style={{ paddingLeft: '0px', paddingRight: '0px', paddingBottom: '10px', paddingTop: '10px' }} onClick={redirectPricingTwo}>Pricing</Navbar.Link>
-              <Navbar.Link className='border-b-0 text-black  font-normal mb-2 mt-2 dark:text-white hover:bg-white dark:hover:bg-black hover:text-black md:hover:text-black dark:hover:text-white dark:md:hover:text-white' style={{ paddingLeft: '0px', paddingRight: '0px', paddingBottom: '10px', paddingTop: '10px' }} onClick={redirectFeatures}>Features</Navbar.Link>
-              <Navbar.Link onClick={redirectSignIn} className='border-b-0 text-black  font-normal mb-2 mt-2 border-black dark:text-white dark:border-white hover:bg-white dark:hover:bg-black hover:text-black md:hover:text-black dark:hover:text-white dark:md:hover:text-white' style={{ borderWidth: '1px', paddingLeft: '15px', paddingRight: '15px', paddingBottom: '10px', paddingTop: '10px' }}>SignIn</Navbar.Link>
-              <Navbar.Link onClick={redirectSignUp} className='border-b-0 text-white  font-normal mb-2 mt-2 bg-black dark:text-black dark:bg-white  hover:bg-black dark:hover:bg-white md:dark:hover:bg-white md:hover:bg-black hover:text-white md:hover:text-white dark:hover:text-black dark:md:hover:text-black' style={{ paddingLeft: '15px', paddingRight: '15px', paddingBottom: '10px', paddingTop: '10px' }}>SignUp</Navbar.Link>
-            </Navbar.Collapse>
-          </Navbar>
-        </>
-        :
-        <>
-          <Navbar fluid className=' py-3 dark:bg-black border-b border-black dark:border-white'>
-            <Navbar.Brand href={websiteURL} className="ml-1">
-              <LogoComponent isDarkMode={storedTheme} />
-              <span className="self-center whitespace-nowrap text-2xl font-black dark:text-white ">{name}</span>
-            </Navbar.Brand>
-            <div className="flex md:hidden justify-center items-center">
-              <DarkModeToggle className='inline-flex items-cente md:hidden' />
-              <Navbar.Toggle className='inline-flex items-center rounded-lg p-2 text-sm text-black hover:bg-white focus:outline-none focus:ring-0 focus:ring-gray-200 dark:text-white dark:hover:bg-black dark:focus:ring-gray-600 md:hidden' />
-            </div>
-            <Navbar.Collapse>
-              <div className="hidden md:flex justify-center items-center">
-                <DarkModeToggle />
-              </div>
-              <Navbar.Link className='border-b-0 text-black  font-normal mb-2 mt-2 dark:text-white  hover:bg-white dark:hover:bg-black hover:text-black md:hover:text-black dark:hover:text-white dark:md:hover:text-white' style={{ paddingLeft: '0px', paddingRight: '0px', paddingBottom: '10px', paddingTop: '10px' }} onClick={redirectHome}>Home</Navbar.Link>
-              <Navbar.Link className='border-b-0 text-black  font-normal mb-2 mt-2 dark:text-white hover:bg-white dark:hover:bg-black hover:text-black md:hover:text-black dark:hover:text-white dark:md:hover:text-white' style={{ paddingLeft: '0px', paddingRight: '0px', paddingBottom: '10px', paddingTop: '10px' }} onClick={redirectProfile}>Profile</Navbar.Link>
-              <Navbar.Link className='border-b-0 text-black  font-normal mb-2 mt-2 dark:text-white hover:bg-white dark:hover:bg-black hover:text-black md:hover:text-black dark:hover:text-white dark:md:hover:text-white' style={{ paddingLeft: '0px', paddingRight: '0px', paddingBottom: '10px', paddingTop: '10px' }} onClick={Logout}>Logout</Navbar.Link>
-              <Navbar.Link className='border-b-0 text-black  font-normal mb-2 mt-2 dark:text-white hover:bg-white dark:hover:bg-black hover:text-black md:hover:text-black dark:hover:text-white dark:md:hover:text-white' style={{ paddingLeft: '0px', paddingRight: '0px', paddingBottom: '10px', paddingTop: '10px' }} onClick={redirectPricing}>Pricing</Navbar.Link>
-              {admin ? <Navbar.Link className='border-b-0 text-black  font-normal mb-2 mt-2 dark:text-white hover:bg-white dark:hover:bg-black hover:text-black md:hover:text-black dark:hover:text-white dark:md:hover:text-white' style={{ paddingLeft: '0px', paddingRight: '0px', paddingBottom: '10px', paddingTop: '10px' }} onClick={redirectAdmin}>Admin</Navbar.Link> : <> </>}
-              <Navbar.Link onClick={redirectGenerate} className='border-b-0 text-white  font-normal mb-2 mt-2 bg-black dark:text-black dark:bg-white  hover:bg-black dark:hover:bg-white md:dark:hover:bg-white md:hover:bg-black hover:text-white md:hover:text-white dark:hover:text-black dark:md:hover:text-black' style={{ paddingLeft: '15px', paddingRight: '15px', paddingBottom: '10px', paddingTop: '10px' }}>Generate Course</Navbar.Link>
-            </Navbar.Collapse>
-          </Navbar>
-        </>
-      }
-
+      <Navbar fluid className={`py-3 ${navBg}`}>
+        <Navbar.Brand href={websiteURL} className="ml-1 flex items-center gap-2">
+          <LogoComponent isDarkMode={storedTheme} />
+          <span className={`self-center whitespace-nowrap text-2xl font-black ${storedTheme === "true" ? "text-pink-100" : "text-blue-900"}`}>{name}</span>
+        </Navbar.Brand>
+        <div className="flex md:hidden justify-center items-center">
+          <DarkModeToggle className='inline-flex items-center md:hidden' />
+          <Navbar.Toggle className='inline-flex items-center rounded-lg p-2 text-sm focus:outline-none focus:ring-0 md:hidden' />
+        </div>
+        <Navbar.Collapse>
+          <div className="hidden md:flex justify-center items-center">
+            <DarkModeToggle />
+          </div>
+          <Navbar.Link
+            className={`${linkBase} ${storedTheme === "true" ? linkDark : linkLight}`}
+            onClick={isHome ? redirectPricingTwo : redirectPricing}
+          >
+            Pricing
+          </Navbar.Link>
+          <Navbar.Link
+            className={`${linkBase} ${storedTheme === "true" ? linkDark : linkLight}`}
+            onClick={redirectFeatures}
+          >
+            Features
+          </Navbar.Link>
+          {!isHome && (
+            <>
+              <Navbar.Link
+                onClick={redirectHome}
+                className={`${linkBase} ${storedTheme === "true" ? linkDark : linkLight}`}
+              >
+                Home
+              </Navbar.Link>
+              <Navbar.Link
+                onClick={redirectProfile}
+                className={`${linkBase} ${storedTheme === "true" ? linkDark : linkLight}`}
+              >
+                Profile
+              </Navbar.Link>
+              <Navbar.Link
+                onClick={Logout}
+                className={`${linkBase} ${storedTheme === "true" ? linkDark : linkLight}`}
+              >
+                Logout
+              </Navbar.Link>
+              {admin && (
+                <Navbar.Link
+                  className={`${linkBase} ${storedTheme === "true" ? linkDark : linkLight}`}
+                  onClick={redirectAdmin}
+                >
+                  Admin
+                </Navbar.Link>
+              )}
+              <Navbar.Link
+                onClick={redirectGenerate}
+                className={`${btnBase} ${storedTheme === "true" ? btnDark : btnLight} ml-2 !mt-0 !mb-0 !px-5 !py-2 !rounded-lg !shadow-md hover:scale-105`}
+                as="button"
+              >
+                Generate Course
+              </Navbar.Link>
+            </>
+          )}
+          {isHome && (
+            <>
+              <Navbar.Link
+                onClick={redirectSignIn}
+                className={`${linkBase} ${storedTheme === "true" ? linkDark : linkLight}`}
+              >
+                SignIn
+              </Navbar.Link>
+              <Navbar.Link
+                onClick={redirectSignUp}
+                className={`${btnBase} ${storedTheme === "true" ? btnDark : btnLight} ml-2`}
+              >
+                SignUp
+              </Navbar.Link>
+            </>
+          )}
+        </Navbar.Collapse>
+      </Navbar>
     </Flowbite>
   );
 };

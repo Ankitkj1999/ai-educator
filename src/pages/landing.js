@@ -7,12 +7,19 @@ import SlideThree from '../components/landing/slideThree';
 import SlideFour from '../components/landing/slideFour';
 import SlideFive from '../components/landing/slideFive';
 import SlideSix from '../components/landing/slideSix';
+import SlideCourses from '../components/landing/slideCourses';
 import { serverURL } from '../constants';
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+// Import Animate.css for simple animations
+import 'animate.css';
 
 const Landing = () => {
 
     useEffect(() => {
+        AOS.init({ once: false, duration: 800, offset: 100 });
         async function dashboardData() {
             const postURL = serverURL + `/api/policies`;
             const response = await axios.get(postURL);
@@ -26,14 +33,29 @@ const Landing = () => {
 
     return (
         <>
-            <Header isHome={false} />
-            <SlideOne />
-            <SlideTwo />
-            <SlideThree />
-            <SlideFour />
-            <SlideFive />
-            <SlideSix />
-            <Footers />
+            <Header isHome={false} data-aos="fade-down" />
+            <div data-aos="fade-up">
+                <SlideOne />
+            </div>
+            <div data-aos="fade-right">
+                <SlideTwo />
+            </div>
+            <div data-aos="fade-left">
+                <SlideThree />
+            </div>
+            <div data-aos="zoom-in-up">
+                <SlideFour />
+            </div>
+            <div data-aos="fade-up">
+                <SlideFive />
+            </div>
+            <div data-aos="fade-up">
+                <SlideSix />
+            </div>
+            <div data-aos="zoom-in-up">
+                <SlideCourses />
+            </div>
+            <Footers data-aos="fade-up" />
         </>
     );
 };
