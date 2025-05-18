@@ -17,6 +17,7 @@ const axios = require('axios');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Flutterwave = require('flutterwave-node-v3');
 const flw = new Flutterwave(process.env.FLUTTERWAVE_PUBLIC_KEY, process.env.FLUTTERWAVE_SECRET_KEY);
+const rateLimit = require('express-rate-limit')
 
 //INITIALIZE
 const app = express();
@@ -70,6 +71,14 @@ app.use((req, res, next) => {
     console.log(`[${now}] Received ${req.method} request for ${req.originalUrl}`);
     next();
 });
+
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 100,
+    message: "Too many requests, please try again later.", 
+})
+
+app.use('/api' , limiter)
 
  
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
